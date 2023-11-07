@@ -17,16 +17,18 @@ class Juego extends Phaser.Scene {
         this.load.image('deco', 'deco.webp');
         this.load.image('lupa', 'lupa.png');
         this.load.image('robot', 'robot.webp');
+        this.load.image('liquido', 'Liquido.png');
         this.load.image('particle_yellow', 'particula.png');
     }
 
     create() {
         this.add.image(0, 0, 'fondo').setOrigin(0, 0).setScale(0.6);
         this.add.image(450, 450, 'primera').setScale(0.3);
+        this.add.image(200, 130, 'liquido').setScale(0.5);
         this.add.image(750, 500, 'termo').setScale(0.3).setDepth(2);
         this.add.image(100, 500, 'deco').setScale(1);
         this.add.image(400, 300, 'fond').setScale(1.45, 1.75).setDepth(2);
-        const robot = this.add.image(200, 320, 'robot').setScale(0.5);
+        const robot = this.add.image(200, 320, 'robot').setScale(0.4);
         const lupa = this.add.image(500, 300, 'lupa').setScale(0.7); // Crea la capa y define su posición
         this.physics.world.setBounds(520, 200, 90, 90);
 
@@ -45,8 +47,8 @@ class Juego extends Phaser.Scene {
             key: 'particle_yellow',
             frameQuantity: 300,
             collideWorldBounds: true,
-            bounceX: 0.91,
-            bounceY: 0.91,
+            bounceX: 0.94,
+            bounceY: 0.94,
         });
 
         this.physics.add.collider(particles, particles);

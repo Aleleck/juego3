@@ -18,13 +18,17 @@ class Juego extends Phaser.Scene {
         this.load.image('lupa', 'lupa.png');
         this.load.image('robot', 'robot.webp');
         this.load.image('liquido', 'Liquido.png');
+        this.load.image('solido', 'solido.png');
+        this.load.image('gas', 'gas.png');
         this.load.image('particle_yellow', 'particula.png');
     }
 
     create() {
         this.add.image(0, 0, 'fondo').setOrigin(0, 0).setScale(0.6);
         this.add.image(450, 450, 'primera').setScale(0.3);
-        this.add.image(200, 130, 'liquido').setScale(0.5);
+        const solido = this.add.image(200, 130, 'solido').setScale(0.5);
+        const liquido = this.add.image(200, 130, 'liquido').setScale(0.5).setVisible(false);
+        const gas = this.add.image(200, 130, 'gas').setScale(0.5).setVisible(false);
         this.add.image(750, 500, 'termo').setScale(0.3).setDepth(2);
         this.add.image(100, 500, 'deco').setScale(1);
         this.add.image(400, 300, 'fond').setScale(1.45, 1.75).setDepth(2);
@@ -45,10 +49,10 @@ class Juego extends Phaser.Scene {
 
         const particles = this.physics.add.group({
             key: 'particle_yellow',
-            frameQuantity: 300,
+            frameQuantity: 200,
             collideWorldBounds: true,
-            bounceX: 0.94,
-            bounceY: 0.94,
+            bounceX: 0.90,
+            bounceY: 0.90,
         });
 
         this.physics.add.collider(particles, particles);
@@ -60,7 +64,7 @@ class Juego extends Phaser.Scene {
             );
             particle.setScale(0.2);
             particle.body.allowGravity = false;
-            particle.setVelocity(Phaser.Math.Between(-20, 20), Phaser.Math.Between(-20, 20)); // Valores más bajos
+            particle.setVelocity(Phaser.Math.Between(-50, 50), Phaser.Math.Between(-50, 50)); // Valores más bajos
         });
 
         let numClicks = 0; // Contador de clics
@@ -90,8 +94,10 @@ class Juego extends Phaser.Scene {
                 }  else if (numClicks === 2) {
                     vid1.setVisible(false);
                     vid2.play(true);
+                    solido.setVisible(false);
+                    liquido.setVisible(true);
                     //lupa.setDepth(2);
-                    for (let i = 0; i < 200; i++) {
+                    for (let i = 0; i < 100; i++) {
                         const particle = particles.getChildren()[i];
                         if (particle) {
                             particle.destroy();
@@ -101,8 +107,8 @@ class Juego extends Phaser.Scene {
                 } else if (numClicks === 3) {
                     vid2.setVisible(false);
                     vid3.play(true);
-                    
-                    for (let i = 0; i < 50; i++) {
+                    this.add.image(200, 130, 'gas').setScale(0.5).setDepth(2);
+                    for (let i = 0; i < 100; i++) {
                         const particle = particles.getChildren()[i];
                         if (particle) {
                             particle.destroy();
@@ -111,7 +117,9 @@ class Juego extends Phaser.Scene {
                 } else if (numClicks === 4) {
                     vid3.setVisible(false);
                     vid4.play(true);
-                    for (let i = 0; i < 40; i++) {
+                    liquido.setVisible(false);
+                    gas.setVisible(true);
+                    for (let i = 0; i < 200; i++) {
                         const particle = particles.getChildren()[i];
                         if (particle) {
                             particle.destroy();
@@ -127,9 +135,6 @@ class Juego extends Phaser.Scene {
 
     }
 
-    update(time, delta) {
-
-    }
 }
 
 export default Juego;

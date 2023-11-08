@@ -21,6 +21,7 @@ class Juego extends Phaser.Scene {
         this.load.image('solido', 'solido.png');
         this.load.image('gas', 'gas.png');
         this.load.image('reset', 'reset.png');
+        this.load.image('puntero', 'puntero.png');
         this.load.image('particle_yellow', 'particula.png');
     }
 
@@ -37,6 +38,7 @@ class Juego extends Phaser.Scene {
         const robot = this.add.image(200, 320, 'robot').setScale(0.4);
         const lupa = this.add.image(500, 300, 'lupa').setScale(0.7); // Crea la capa y define su posición
         this.physics.world.setBounds(520, 200, 90, 90);
+        this.input.setDefaultCursor('url("assets/puntero.png"), pointer');
 
         const barraRoja = this.add.graphics();
         

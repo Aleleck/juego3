@@ -10,12 +10,14 @@ class Bootloader extends Phaser.Scene {
         this.load.image('presentacion1', 'img1.png');
         this.load.image('presentacion2', 'img2.png');
         this.load.image('siguiente', 'siguiente.png');
+        this.load.image('puntero', 'puntero.png');
     }
 
     create() {
         // Muestra la primera imagen
         const image = this.add.image(400, 300, 'presentacion1');
         image.setDisplaySize(800, 600);
+        this.input.setDefaultCursor('url("assets/puntero.png"), pointer');
 
         // Agrega un botón para avanzar a la siguiente imagen
         const button = this.add.image(700, 500, 'siguiente').setScale(0.2);
